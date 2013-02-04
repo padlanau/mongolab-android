@@ -1,0 +1,27 @@
+#labels Phase-Implementation,Featured
+#How-to.
+
+= MongoLabAndroid =
+
+A simple library to connect to a mongolab db and save boilerplate code (httpget, httppost etc.)
+
+
+= Usage =
+
+In your android activity, include the following:
+
+{{{
+private final String DB_URL = "https://api.mongolab.com/api/...";
+private final String API_KEY = "your-api-key";
+private final String COLLECTION = "your-collection";
+...
+MongoLabCollection coll = new MongoLabCollection(DB_URL, API_KEY, COLLECTION);
+String json = coll.getAll(); //gets all results in your collection
+try {
+  JSONArray results = new JSONArray(json);
+  // do something with your results...
+} catch(JSONException e){
+  // handle your exception
+}
+
+}}}
