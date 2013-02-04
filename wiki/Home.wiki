@@ -1,5 +1,5 @@
 #labels Phase-Implementation,Featured
-#How-to.
+# How-to.
 
 = MongoLabAndroid =
 
@@ -23,5 +23,24 @@ try {
 } catch(JSONException e){
   // handle your exception
 }
+
+// post example with simple parameters
+List<NameValuePair> params = new ArrayList<NameValuePair>();
+params.add(new BasicNameValuePair("type", "restaurant"));
+params.add(new BasicNameValuePair("foodtype", "Italian"));
+
+String json = coll.post(params);
+
+// runCommand with json file attached
+String filecontent = "{ geoNear: \"restaurants\", near : [51.901283,-8.484535], spherical: true, distanceMultiplier: 3963.192 }"; 
+				
+String jsonfilepath = getExternalCacheDir() + "request.json"; 
+File jsonfile = new File(jsonfilepath);
+				
+FileWriter fw = new FileWriter(jsonfile);
+fw.write(filecontent);
+fw.flush();
+fw.close();				
+String json = restaurants.runCommand( new File(jsonfilepath) );
 
 }}}
