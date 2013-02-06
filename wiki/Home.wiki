@@ -15,32 +15,15 @@ private final String DB_URL = "https://api.mongolab.com/api/...";
 private final String API_KEY = "your-api-key";
 private final String COLLECTION = "your-collection";
 ...
-MongoLabCollection coll = new MongoLabCollection(DB_URL, API_KEY, COLLECTION);
-String json = coll.getAll(); //gets all results in your collection
-try {
-  JSONArray results = new JSONArray(json);
-  // do something with your results...
-} catch(JSONException e){
-  // handle your exception
-}
+MongoLabDB db = new MongoLabDB(DB_URL, API_KEY);
 
-// post example with simple parameters
-List<NameValuePair> params = new ArrayList<NameValuePair>();
-params.add(new BasicNameValuePair("type", "restaurant"));
-params.add(new BasicNameValuePair("foodtype", "Italian"));
+// All results are either JSONObject or JSONArray
+Log.i("INFO", db.listDatabases().toString()); // prints databases
+Log.i("INFO", db.listCollections().toString()); // prints collections
 
-String json = coll.post(params);
+// get collection
+MongoLabDB.MongoLabCollection coll = db.getCollection(COLLECTION);
+Log.i("INFO", coll.getById("some-id-here").toString());
 
-// runCommand with json file attached
-String filecontent = "{ geoNear: \"restaurants\", near : [51.901283,-8.484535], spherical: true, distanceMultiplier: 3963.192 }"; 
-				
-String jsonfilepath = getExternalCacheDir() + "request.json"; 
-File jsonfile = new File(jsonfilepath);
-				
-FileWriter fw = new FileWriter(jsonfile);
-fw.write(filecontent);
-fw.flush();
-fw.close();				
-String json = restaurants.runCommand( new File(jsonfilepath) );
 
 }}}
