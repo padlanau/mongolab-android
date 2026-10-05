@@ -15,6 +15,12 @@ public class MongoLabDB {
 		this.apiKey = apiKey;
 		client = new MongoLabHttpClient();
 	}
+
+	public MongoLabDB2(String database, String apiKey){
+		this.database = database;
+		this.apiKey = apiKey;
+		client = new MongoLabHttpClient();
+	}
 	
 	// obtain collection
 	public MongoLabCollection getCollection(String collection){
